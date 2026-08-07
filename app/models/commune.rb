@@ -5,4 +5,8 @@ class Commune < ApplicationRecord
   belongs_to :intercommunality, required: false
   has_many :street_locations, dependent: :destroy
   has_many :streets, through: :street_locations
+
+  def self.to_hash
+    pluck(:code_insee, :name).to_h
+  end
 end

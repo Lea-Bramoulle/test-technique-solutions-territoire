@@ -12,6 +12,11 @@ class Intercommunality < ApplicationRecord
 
     before_validation :generate_slug
 
+
+    def communes_hash
+      communes.pluck(:code_insee, :name).to_h
+    end
+
     private
 
     def generate_slug
@@ -19,4 +24,5 @@ class Intercommunality < ApplicationRecord
           self.slug = name.parameterize 
         end
     end
+
 end

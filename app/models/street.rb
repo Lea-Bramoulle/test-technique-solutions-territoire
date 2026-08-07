@@ -15,7 +15,6 @@ class Street < ApplicationRecord
 
   def to_greater_than_from
     return unless from && to
-    
     errors.add(:to, ":to must be greater than :from") if to <= from
   end
 end

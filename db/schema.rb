@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_08_07_145747) do
+ActiveRecord::Schema[7.0].define(version: 2026_08_07_164151) do
   create_table "communes", force: :cascade do |t|
-    t.string "name"
-    t.string "code_insee"
+    t.string "name", null: false
+    t.string "code_insee", limit: 5, null: false
     t.integer "intercommunality_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,12 +22,13 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_07_145747) do
   end
 
   create_table "intercommunalities", force: :cascade do |t|
-    t.string "name"
-    t.string "siren"
-    t.integer "to"
-    t.string "form"
+    t.string "name", null: false
+    t.string "siren", limit: 9, null: false
+    t.string "form", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["siren"], name: "index_intercommunalities_on_siren", unique: true
   end
 
   create_table "street_locations", force: :cascade do |t|
@@ -40,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_07_145747) do
   end
 
   create_table "streets", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.integer "from"
     t.integer "to"
     t.datetime "created_at", null: false

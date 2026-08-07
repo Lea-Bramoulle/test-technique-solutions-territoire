@@ -22,9 +22,9 @@ ActiveRecord::Schema[7.0].define(version: 2026_08_07_164151) do
   end
 
   create_table "intercommunalities", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "siren", limit: 9, null: false
-    t.string "form", null: false
+    t.string "name"
+    t.string "siren", limit: 9
+    t.string "form"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"

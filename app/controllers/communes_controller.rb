@@ -2,6 +2,7 @@ require "csv"
 
 class CommunesController < ApplicationController
   rescue_from ActionController::UnknownFormat, with: -> { head :not_acceptable }
+  rescue_from ActiveRecord::RecordNotFound, with: -> { head :not_found }
 
   def index
     @communes = Commune.all
@@ -13,6 +14,8 @@ class CommunesController < ApplicationController
   end
 
   def show
+    @commune = Commune.find_by!(code_insee: params[:id])
+    render json: @commune
   end
 
   def create

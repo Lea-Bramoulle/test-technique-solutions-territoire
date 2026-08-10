@@ -15,5 +15,14 @@ class Commune < ApplicationRecord
     return all if query.blank?
     where("lower(name) LIKE ?", "%#{sanitize_sql_like(query.downcase)}%")
   end
+
+  def self.to_csv
+    CSV.generate(col_sep: ";") do |csv|
+      csv << %w[code_insee name]
+      all.each do |commune|
+        csv << [commune.code_insee, commune.name]
+      end
+    end
+  end
 end
 

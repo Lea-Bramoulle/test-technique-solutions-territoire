@@ -19,6 +19,7 @@ class CommunesController < ApplicationController
   end
 
   def create
+    head :forbidden 
   end
 
   def update

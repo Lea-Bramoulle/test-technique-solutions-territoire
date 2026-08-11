@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_08_07_164151) do
+ActiveRecord::Schema[7.0].define(version: 2026_08_11_185833) do
   create_table "communes", force: :cascade do |t|
     t.string "name", null: false
     t.string "code_insee", limit: 5, null: false
     t.integer "intercommunality_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "population"
     t.index ["code_insee"], name: "index_communes_on_code_insee", unique: true
     t.index ["intercommunality_id"], name: "index_communes_on_intercommunality_id"
   end

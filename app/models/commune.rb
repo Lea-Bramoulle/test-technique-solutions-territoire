@@ -2,6 +2,7 @@ class Commune < ApplicationRecord
   validates :name, presence: true
   validates :code_insee, presence: true, uniqueness: true, length: { is: 5 },
             format: { with: /\A[0-9AB]{5}\z/i, message: ":code_insee should contain 5 digits or letters for french cities" }
+  validates :population, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
             
   belongs_to :intercommunality, required: false
   has_many :street_locations, dependent: :destroy

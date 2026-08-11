@@ -1,6 +1,7 @@
 require "csv"
 
 class CommunesController < ApplicationController
+  before_action :set_commune, only: [:show, :update]
   rescue_from ActionController::UnknownFormat, with: -> { head :not_acceptable }
   rescue_from ActiveRecord::RecordNotFound, with: -> { head :not_found }
   rescue_from ActionController::ParameterMissing, with: -> { head :bad_request }
@@ -15,7 +16,6 @@ class CommunesController < ApplicationController
   end
 
   def show
-    @commune = Commune.find_by!(code_insee: params[:id])
     render json: @commune
   end
 
@@ -24,8 +24,7 @@ class CommunesController < ApplicationController
   end
 
   def update
-    commune = Commune.find_by!(code_insee: params[:id])
-    commune.update!(commune_model_params)
+    @commune.update!(commune_model_params)
     head :no_content
   end
 
@@ -35,4 +34,7 @@ class CommunesController < ApplicationController
     params.require(:commune).permit(:name)
   end
 
+  def set_commune
+    @commune = Commune.find_by!(code_insee: params[:id])
+  end
 end

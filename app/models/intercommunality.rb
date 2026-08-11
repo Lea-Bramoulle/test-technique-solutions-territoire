@@ -17,6 +17,10 @@ class Intercommunality < ApplicationRecord
       communes.pluck(:code_insee, :name).to_h
     end
 
+    def population
+      communes.sum(:population)
+    end
+
     private
 
     def generate_slug
